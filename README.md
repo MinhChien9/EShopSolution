@@ -19,3 +19,8 @@ https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx
 https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding
 - Seeding data OnModelCreating
 https://www.learnentityframeworkcore.com/migrations/seeding
+
+3.ASP.NET Core Identity database
+<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.13" />
+
+https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-6.0&tabs=visual-studio
