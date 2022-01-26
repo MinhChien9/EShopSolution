@@ -24,3 +24,10 @@ https://www.learnentityframeworkcore.com/migrations/seeding
 <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.13" />
 
 https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-6.0&tabs=visual-studio
+
+4.Application layer
+- Product service
+- Add product image
+- WebAPI
+https://docs.microsoft.com/en-us/ef/ef6/fundamentals/configuring/connection-strings
+
