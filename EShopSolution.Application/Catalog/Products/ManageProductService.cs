@@ -3,7 +3,6 @@ using EShopSolution.Data.EF;
 using EShopSolution.Data.Entities;
 using EShopSolution.Utilities.Exceptions;
 using EShopSolution.ViewModels.Catalog.Products;
-using EShopSolution.ViewModels.Catalog.Products.Manage;
 using EShopSolution.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -154,7 +153,7 @@ namespace EShopSolution.Application.Catalog.Products
 
         }
 
-        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request)
         {
             //1. Select join
             var query = from p in _context.Products
