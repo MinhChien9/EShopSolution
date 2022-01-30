@@ -1,4 +1,5 @@
 using EShopSolution.Application.Catalog.Products;
+using EShopSolution.Application.Common;
 using EShopSolution.Data.EF;
 using EShopSolution.Utilities.Constants;
 using Microsoft.AspNetCore.Builder;
@@ -30,17 +31,19 @@ namespace BackendApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
 
             services.AddDbContext<EShopDbContext>(
                 option => option.UseSqlServer(Configuration.GetConnectionString(SystemConstant.MainConnectionString)));
 
             //Declare Dependency injection
+            services.AddTransient<IStorageService, StorageService>();
             services.AddTransient<IPublicProductService, PublicProductService>();
+            services.AddTransient<IManageProductService, ManageProductService>();
 
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BackendApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "EShopSolution", Version = "v1" });
             });
         }
 
@@ -50,8 +53,6 @@ namespace BackendApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EShopSolution v1"));
             }
 
             app.UseHttpsRedirection();
@@ -59,6 +60,14 @@ namespace BackendApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "EShopSolution V1");
+            }
+            );
 
             app.UseEndpoints(endpoints =>
             {
