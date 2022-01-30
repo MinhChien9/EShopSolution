@@ -1,4 +1,5 @@
-﻿using EShopSolution.ViewModels.Catalog.Products;
+﻿using EShopSolution.ViewModels.Catalog.ProductImages;
+using EShopSolution.ViewModels.Catalog.Products;
 using EShopSolution.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
@@ -11,16 +12,19 @@ namespace EShopSolution.Application.Catalog.Products
         Task<int> Create(ProductCreateRequest request);
         Task<int> Update(ProductUpdateRequest request);
         Task<int> Delete(int productId);
+
+        Task<ProductViewModel> GetById(int productId, string languageId);
         Task<bool> UpdatePrice(int productId, decimal newPrice);
         Task<bool> UpdateStock(int productId, int quantity);
-        Task IncreaseViewCount(int productId);
+        Task<bool> IncreaseViewCount(int productId);
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
 
-        Task<int> AddImages(int productId, List<IFormFile> files);
-        Task<int> UpdateImage(int imageId, string caption, bool isDefault);
+        Task<int> AddImage(int productId, ProductImageCreateRequest request);
         Task<int> RemoveImage(int imageId);
-
+        Task<int> UpdateImage(int imageId, ProductImageUpdateRequest request);
+        Task<ProductImageViewModel> GetImageById(int imageId);
         Task<List<ProductImageViewModel>> GetListImages(int productId);
+
 
     }
 }
