@@ -30,4 +30,10 @@ https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?vi
 - Add product image
 - WebAPI
 https://docs.microsoft.com/en-us/ef/ef6/fundamentals/configuring/connection-strings
+7
+8. Fluent validate request
+9. Admin app
+- Themes: SBAdmin 2
+- using httpclientfactory to call webapi
+10. Cookie authentication without asp.net identity
 
