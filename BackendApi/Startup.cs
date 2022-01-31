@@ -1,9 +1,12 @@
-using EShopSolution.Application.Catalog.Products;
+﻿using EShopSolution.Application.Catalog.Products;
 using EShopSolution.Application.Common;
 using EShopSolution.Application.System.Users;
 using EShopSolution.Data.EF;
 using EShopSolution.Data.Entities;
 using EShopSolution.Utilities.Constants;
+using EShopSolution.ViewModels.System.Users;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +40,6 @@ namespace BackendApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
 
             services.AddDbContext<EShopDbContext>(
                 option => option.UseSqlServer(Configuration.GetConnectionString(SystemConstant.MainConnectionString)));
@@ -56,6 +58,16 @@ namespace BackendApi
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
+
+
+            //Thêm DI từng validator hoặc thêm 1 lần cả folder như ở dưới
+            //services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+
+            //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
+            //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
+
+            services.AddControllers().
+                AddFluentValidation(fv=>fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
             services.AddSwaggerGen(c =>
             {
