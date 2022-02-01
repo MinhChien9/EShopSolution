@@ -34,7 +34,7 @@ namespace BackendApi.Controllers
             if (string.IsNullOrEmpty(resultToken))
                 return BadRequest("Username or passsword is incorrect");
 
-            return Ok(new { token = resultToken });
+            return Ok(resultToken);
         }
         [HttpPost("register")]
         [AllowAnonymous]
