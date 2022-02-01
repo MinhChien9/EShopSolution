@@ -12,6 +12,7 @@ namespace BackendApi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -33,10 +34,10 @@ namespace BackendApi.Controllers
 
             if (string.IsNullOrEmpty(resultToken))
                 return BadRequest("Username or passsword is incorrect");
-
+            
             return Ok(resultToken);
         }
-        [HttpPost("register")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -50,6 +51,14 @@ namespace BackendApi.Controllers
                 return BadRequest("Register unsuccessful");
 
             return Ok();
+        }
+
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging( [FromQuery] GetUserPagingRequest request)
+        {
+            var products = await _userService.GetUserPaging( request);
+
+            return Ok(products);
         }
     }
 }

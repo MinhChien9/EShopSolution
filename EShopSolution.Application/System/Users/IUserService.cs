@@ -1,4 +1,5 @@
-﻿using EShopSolution.ViewModels.System.Users;
+﻿using EShopSolution.ViewModels.Common;
+using EShopSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace EShopSolution.Application.System.Users
     {
         Task<string> Authenticate(LoginRequest request);
         Task<bool> Register(RegisterRequest request);
+        Task<PagedResult<UserViewModel>> GetUserPaging(GetUserPagingRequest request);
     }
 }
