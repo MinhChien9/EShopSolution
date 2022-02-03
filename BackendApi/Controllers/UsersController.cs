@@ -24,6 +24,7 @@ namespace BackendApi.Controllers
 
         [HttpPost("authenticate")]
         [AllowAnonymous]
+        //localhost:5001/users/authenticate
         public async Task<IActionResult> Authenticate([FromBody]LoginRequest request)
         {
 
@@ -37,8 +38,10 @@ namespace BackendApi.Controllers
             
             return Ok(resultToken);
         }
+
         [HttpPost]
         [AllowAnonymous]
+        //localhost:5001/users
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
 
