@@ -20,7 +20,6 @@
             <table id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Họ</th>
                         <th>Tên</th>
                         <th>SĐT</th>
@@ -30,7 +29,6 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>Id</th>
                         <th>Họ</th>
                         <th>Tên</th>
                         <th>SĐT</th>
@@ -58,9 +56,9 @@
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                             </td>
 
                         </tr>
