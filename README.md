@@ -37,3 +37,5 @@ https://docs.microsoft.com/en-us/ef/ef6/fundamentals/configuring/connection-stri
 - using httpclientfactory to call webapi
 10. Cookie authentication without asp.net identity
 
+14. user paging
+- View component :https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-6.0
