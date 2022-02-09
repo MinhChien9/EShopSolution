@@ -38,7 +38,6 @@ namespace EShopSolution.AdminApp.Controllers
             return View(data.ResultObj);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -47,6 +46,14 @@ namespace EShopSolution.AdminApp.Controllers
             HttpContext.Session.Remove("Token");
 
             return RedirectToAction("Index", "Login");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _userApiClient.GetById(id);
+            
+            return View(result.ResultObj);
         }
 
         [HttpGet]

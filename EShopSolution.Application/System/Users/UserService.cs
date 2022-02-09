@@ -120,7 +120,9 @@ namespace EShopSolution.Application.System.Users
 
             var pagedResult = new PagedResult<UserViewModel>()
             {
-                TotalRecord = totalRow,
+                TotalRecords = totalRow,
+                PageSize=request.PageSize,
+                PageIndex=request.PageIndex,
                 Items = data
             };
 
@@ -148,7 +150,7 @@ namespace EShopSolution.Application.System.Users
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (result.Succeeded)
-                new ApiSuccessResult<bool>();
+                return new ApiSuccessResult<bool>();
 
             return new ApiErrorResult<bool>("Đăng ký không thành công");
         }
