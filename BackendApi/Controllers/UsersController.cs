@@ -89,5 +89,16 @@ namespace BackendApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _userService.Delete(id);
+
+            if (!result.IsSuccessed)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
     }
 }

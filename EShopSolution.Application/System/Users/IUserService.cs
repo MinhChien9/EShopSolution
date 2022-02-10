@@ -13,6 +13,7 @@ namespace EShopSolution.Application.System.Users
         Task<ApiResult<string>> Authenticate(LoginRequest request);
         Task<ApiResult<bool>> Register(RegisterRequest request);
         Task<ApiResult<bool>> Update(Guid id,UserUpdateRequest request);
+        Task<ApiResult<bool>> Delete(Guid id);
         Task<ApiResult<PagedResult<UserViewModel>>> GetUserPaging(GetUserPagingRequest request);
         Task<ApiResult<UserViewModel>> GetById(Guid id);
     }

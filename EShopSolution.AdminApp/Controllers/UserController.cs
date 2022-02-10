@@ -52,7 +52,7 @@ namespace EShopSolution.AdminApp.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var result = await _userApiClient.GetById(id);
-            
+
             return View(result.ResultObj);
         }
 
@@ -108,6 +108,31 @@ namespace EShopSolution.AdminApp.Controllers
                 return View();
 
             var result = await _userApiClient.UpdateUser(request.Id, request);
+
+            if (result.IsSuccessed)
+                return RedirectToAction("Index");
+
+            ModelState.AddModelError("", result.Message);
+
+            return View(request);
+        }
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            var deleteRequest = new UserDeleteRequest()
+            {
+                Id = id
+            };
+            return View(deleteRequest);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(UserDeleteRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _userApiClient.DeleteUser(request);
 
             if (result.IsSuccessed)
                 return RedirectToAction("Index");
