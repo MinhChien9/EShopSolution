@@ -68,6 +68,21 @@ namespace EShopSolution.Application.System.Users
 
         }
 
+        public async Task<ApiResult<bool>> Delete(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
+            if (user == null)
+                return new ApiErrorResult<bool>("Người dùng không tồn tại");
+
+            var result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+                return new ApiSuccessResult<bool>();
+
+            return new ApiErrorResult<bool>("Xóa không thành công");
+        }
+
         public async Task<ApiResult<UserViewModel>> GetById(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
@@ -121,8 +136,8 @@ namespace EShopSolution.Application.System.Users
             var pagedResult = new PagedResult<UserViewModel>()
             {
                 TotalRecords = totalRow,
-                PageSize=request.PageSize,
-                PageIndex=request.PageIndex,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
                 Items = data
             };
 
