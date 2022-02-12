@@ -5,6 +5,40 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Scripts{
+    <script>
+        var toastHTML = document.getElementById("liveToast");
+        if (toastHTML != null) {
+
+            var option = {
+                autohide: true,
+                animation: true,
+                delay: 2000
+            };
+
+            var toastHTML = document.getElementById("liveToast");
+            var toastEL = new bootstrap.Toast(toastHTML, option);
+            toastEL.show();
+
+        }
+
+    </script>
+
+}
+@if (ViewBag.SuccessMsg != null)
+{
+    <div class=" position-fixed p-3 end-0 " style="z-index: 11">
+        <div id="liveToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    @ViewBag.SuccessMsg
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+}
 
 <div class="container-fluid px-4">
     <h1 class="mt-4">Xóa người dùng</h1>
@@ -18,7 +52,7 @@
                 <a class="btn btn-success" asp-action="Create" asp-controller="User">Tạo mới</a>
                 <form method="get" class="ms-3" asp-action="Index" asp-controller="User">
                     <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Tìm kiếm" name="keyword" aria-describedby="btnNavbarSearch" />
+                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="@ViewBag.Keyword" name="keyword" aria-describedby="btnNavbarSearch" />
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
                 </form>

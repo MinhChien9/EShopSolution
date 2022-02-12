@@ -22,16 +22,21 @@ namespace EShopSolution.AdminApp.Controllers
             _configuration = configuration;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
         {
-            var sessions = HttpContext.Session.GetString("Token");
-
             var request = new GetUserPagingRequest()
             {
                 Keyword = keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            ViewBag.Keyword = keyword;
 
             var data = await _userApiClient.GetUsersPaging(request);
 
@@ -71,7 +76,10 @@ namespace EShopSolution.AdminApp.Controllers
             var result = await _userApiClient.RegisterUser(request);
 
             if (result.IsSuccessed)
+            {
+                TempData["result"] = "Thêm mới người dùng thành công";
                 return RedirectToAction("Index");
+            }
 
             ModelState.AddModelError("", result.Message);
 
@@ -110,7 +118,10 @@ namespace EShopSolution.AdminApp.Controllers
             var result = await _userApiClient.UpdateUser(request.Id, request);
 
             if (result.IsSuccessed)
+            {
+                TempData["result"] = "Cập nhật người dùng thành công";
                 return RedirectToAction("Index");
+            }
 
             ModelState.AddModelError("", result.Message);
 
@@ -135,7 +146,10 @@ namespace EShopSolution.AdminApp.Controllers
             var result = await _userApiClient.DeleteUser(request);
 
             if (result.IsSuccessed)
+            {
+                TempData["result"] = "Xóa người dùng thành công";
                 return RedirectToAction("Index");
+            }
 
             ModelState.AddModelError("", result.Message);
 
