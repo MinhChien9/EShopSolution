@@ -1,5 +1,6 @@
 ﻿using EShopSolution.Application.Catalog.Products;
 using EShopSolution.Application.Common;
+using EShopSolution.Application.System.Roles;
 using EShopSolution.Application.System.Users;
 using EShopSolution.Data.EF;
 using EShopSolution.Data.Entities;
@@ -57,6 +58,7 @@ namespace BackendApi
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRoleService, RoleService>();
 
 
             //Thêm DI từng validator hoặc thêm 1 lần cả folder như ở dưới
