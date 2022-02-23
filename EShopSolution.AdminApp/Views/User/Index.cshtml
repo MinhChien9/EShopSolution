@@ -93,11 +93,12 @@
                                     @Html.DisplayFor(modelItem => item.Email)
                                 </td>
                                 <td>
-                                    <div class="btn-group ">
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning mx-1" })
-                                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary mx-1" })
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger mx-1" })
-                                    </div>
+
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning mx-1" })
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary mx-1" })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger mx-1" })
+                                    @Html.ActionLink("RoleAssign", "RoleAssign", new { id = item.Id }, new { @class = "btn btn-info mx-1" })
+
                                 </td>
                             </tr>
                         }
