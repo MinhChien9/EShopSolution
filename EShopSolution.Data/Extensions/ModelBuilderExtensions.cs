@@ -123,7 +123,7 @@ namespace EShopSolution.Data.Extensions
             modelBuilder.Entity<ProductTranslation>().HasData(
                     new ProductTranslation()
                     {
-                        Id=1,
+                        Id = 1,
                         ProductId = 1,
                         Name = "Áo sơ mi nam trắng Việt Tiến",
                         LanguageId = "vi-VN",
@@ -135,7 +135,7 @@ namespace EShopSolution.Data.Extensions
                     },
                     new ProductTranslation()
                     {
-                        Id=2,
+                        Id = 2,
                         ProductId = 1,
                         Name = "Viet Tien Men T-Shirt",
                         LanguageId = "en-US",
@@ -157,6 +157,8 @@ namespace EShopSolution.Data.Extensions
 
             var roleId = new Guid("E24409CB-0A1C-4D7C-A43A-25FB9D47BA65");
             var adminId = new Guid("BAE8863E-1029-4E70-8056-5BA1379DDE32");
+            var userRoleId = new Guid("534DBE06-BA7A-481E-A2A7-7B2724427D7C");
+            var userId = new Guid("5AADC56F-8EAA-4FE0-9A23-BF8C4320024C");
 
             modelBuilder.Entity<AppRole>().HasData(
                 new AppRole()
@@ -166,9 +168,18 @@ namespace EShopSolution.Data.Extensions
                     NormalizedName = "admin",
                     Description = "Admin Role"
 
+                },
+                new AppRole()
+                {
+                    Id = userRoleId,
+                    Name = "user",
+                    NormalizedName = "user",
+                    Description = "User Role"
+
                 });
 
             var hasher = new PasswordHasher<AppUser>();
+
             modelBuilder.Entity<AppUser>().HasData(
                 new AppUser()
                 {
@@ -184,6 +195,21 @@ namespace EShopSolution.Data.Extensions
                     LastName = "Huynh",
                     Dob = new DateTime(1999, 10, 17)
 
+                },
+                new AppUser()
+                {
+                    Id = userId,
+                    UserName = "user1",
+                    NormalizedUserName = "user1",
+                    Email = "user1@gmail.com",
+                    NormalizedEmail = "user1@gmail.com",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "user1999"),
+                    SecurityStamp = string.Empty,
+                    FirstName = "User",
+                    LastName = "01",
+                    Dob = new DateTime(1999, 11, 27)
+
                 });
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
@@ -191,6 +217,11 @@ namespace EShopSolution.Data.Extensions
                 {
                     RoleId = roleId,
                     UserId = adminId
+                },
+                new IdentityUserRole<Guid>
+                {
+                    RoleId = userRoleId,
+                    UserId = userId
                 });
 
         }
