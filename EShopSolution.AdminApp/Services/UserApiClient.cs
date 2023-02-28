@@ -36,7 +36,7 @@ namespace EShopSolution.AdminApp.Services
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
 
-            var response = await client.PostAsync("/users/authenticate", httpContent);
+            var response = await client.PostAsync("/api/users/authenticate", httpContent);
 
 
             if (response.IsSuccessStatusCode)
@@ -54,7 +54,7 @@ namespace EShopSolution.AdminApp.Services
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            var response = await client.DeleteAsync($"/users/{request.Id}");
+            var response = await client.DeleteAsync($"/api/users/{request.Id}");
 
             var result = await response.Content.ReadAsStringAsync();
 
@@ -73,7 +73,7 @@ namespace EShopSolution.AdminApp.Services
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            var response = await client.GetAsync($"/users/{id}");
+            var response = await client.GetAsync($"/api/users/{id}");
 
             var result = await response.Content.ReadAsStringAsync();
 
@@ -91,7 +91,7 @@ namespace EShopSolution.AdminApp.Services
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            var response = await client.GetAsync($"/users/paging?pageIndex={request.PageIndex}" +
+            var response = await client.GetAsync($"/api/users/paging?pageIndex={request.PageIndex}" +
                 $"&pageSize={request.PageSize}&keyword={request.Keyword}");
 
             var body = await response.Content.ReadAsStringAsync();
@@ -110,7 +110,7 @@ namespace EShopSolution.AdminApp.Services
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
 
-            var response = await client.PostAsync("/users", httpContent);
+            var response = await client.PostAsync("/api/users", httpContent);
 
             var result = await response.Content.ReadAsStringAsync();
 
@@ -133,7 +133,7 @@ namespace EShopSolution.AdminApp.Services
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            var response = await client.PutAsync($"/users/{id}/roles", httpContent);
+            var response = await client.PutAsync($"/api/users/{id}/roles", httpContent);
 
             var body = await response.Content.ReadAsStringAsync();
 
@@ -155,7 +155,7 @@ namespace EShopSolution.AdminApp.Services
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            var response = await client.PutAsync($"/users/{id}", httpContent);
+            var response = await client.PutAsync($"/api/users/{id}", httpContent);
 
             var result = await response.Content.ReadAsStringAsync();
 

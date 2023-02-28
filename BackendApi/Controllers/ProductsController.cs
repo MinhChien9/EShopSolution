@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BackendApi.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class ProductsController : ControllerBase

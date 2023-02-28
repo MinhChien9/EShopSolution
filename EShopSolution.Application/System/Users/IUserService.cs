@@ -18,7 +18,7 @@ namespace EShopSolution.Application.System.Users
         Task<ApiResult<UserViewModel>> GetById(Guid id);
         Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
 
-        Task<bool> IsUserInRole(Guid userId, string roleName);
+
 
     }
 }

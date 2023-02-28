@@ -1,5 +1,6 @@
 ﻿using EShopSolution.Application.Catalog.Products;
 using EShopSolution.Application.Common;
+using EShopSolution.Application.System.Languages;
 using EShopSolution.Application.System.Roles;
 using EShopSolution.Application.System.Users;
 using EShopSolution.Data.EF;
@@ -59,6 +60,7 @@ namespace BackendApi
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<ILanguageService, LanguageService>();
 
 
             //Thêm DI từng validator hoặc thêm 1 lần cả folder như ở dưới
@@ -68,7 +70,7 @@ namespace BackendApi
             //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
 
             services.AddControllers().
-                AddFluentValidation(fv=>fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+                AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
             services.AddSwaggerGen(c =>
             {
