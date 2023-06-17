@@ -31,7 +31,7 @@ namespace EShopSolution.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+          //  await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return View();
         }
