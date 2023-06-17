@@ -1,4 +1,4 @@
-# ASP.NET Core 5
+﻿# ASP.NET Core 5
 ## Tech Stack
 - ASP.NET Core 5
 - Entity Framework Core 3.1
@@ -39,3 +39,9 @@ https://docs.microsoft.com/en-us/ef/ef6/fundamentals/configuring/connection-stri
 
 14. user paging
 - View component :https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-6.0
+
+17.Phân quyền user
+bug: Chỉ gán quyền cho user mà không xóa quyền được
+	userservice.cs hàm kiểm tra quyền của user không hoạt động
+
+18.Cài đặt ngôn ngữ mặc định

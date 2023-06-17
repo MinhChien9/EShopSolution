@@ -1,4 +1,5 @@
 ﻿using EShopSolution.AdminApp.Services;
+using EShopSolution.Utilities.Constants;
 using EShopSolution.ViewModels.System.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -30,7 +31,7 @@ namespace EShopSolution.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+          //  await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return View();
         }
@@ -57,7 +58,8 @@ namespace EShopSolution.AdminApp.Controllers
                 IsPersistent = false
             };
 
-            HttpContext.Session.SetString("Token", result.ResultObj);
+            HttpContext.Session.SetString(SystemConstant.AppSettings.DefaultLanguageId, _configuration["DefaultLanguageId"]);
+            HttpContext.Session.SetString(SystemConstant.AppSettings.Token, result.ResultObj);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, authProperties);
 

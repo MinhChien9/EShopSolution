@@ -145,19 +145,6 @@ namespace EShopSolution.Application.System.Users
             return new ApiSuccessResult<PagedResult<UserViewModel>>(pagedResult);
         }
 
-        public async Task<bool> IsUserInRole(Guid userId, string roleName)
-        {
-
-            var usersInRole = await _userManager.GetUsersInRoleAsync(roleName);
-
-            foreach (var user in usersInRole)
-            {
-                if (user.Id == userId)
-                    return true;
-            }
-
-            return false;
-        }
 
         public async Task<ApiResult<bool>> Register(RegisterRequest request)
         {
@@ -182,7 +169,7 @@ namespace EShopSolution.Application.System.Users
             if (result.Succeeded)
                 return new ApiSuccessResult<bool>();
 
-            return new ApiErrorResult<bool>("Đăng ký không thành công");
+            return new ApiErrorResult<bool>(result.Errors.Select(e => e.Description).First());
         }
 
         public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
@@ -190,33 +177,27 @@ namespace EShopSolution.Application.System.Users
 
             var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)
+            {
                 return new ApiErrorResult<bool>("Tài khoản không tồn tại");
+            }
 
-
-            var removedRoles = request.Roles.Where(r => r.Selected == false)
-                .Select(role => role.Name)
-                .ToList();
-
+            var removedRoles = request.Roles.Where(x => x.Selected == false).Select(x => x.Name).ToList();
             foreach (var roleName in removedRoles)
             {
-                var roles = await _userManager.GetUsersInRoleAsync(roleName);
-
                 if (await this.IsUserInRole(user.Id, roleName) == true)
                 {
                     await _userManager.RemoveFromRoleAsync(user, roleName);
                 }
             }
 
-            var addedRoles = request.Roles.Where(r => r.Selected)
-                .Select(r => r.Name)
-                .ToList();
-
+            var addedRoles = request.Roles.Where(x => x.Selected).Select(x => x.Name).ToList();
             foreach (var roleName in addedRoles)
             {
                 if (await this.IsUserInRole(user.Id, roleName) == false)
+                {
                     await _userManager.AddToRoleAsync(user, roleName);
+                }
             }
-
 
             return new ApiSuccessResult<bool>();
         }
@@ -240,7 +221,19 @@ namespace EShopSolution.Application.System.Users
             if (result.Succeeded)
                 return new ApiSuccessResult<bool>();
 
-            return new ApiErrorResult<bool>("Cập nhật không thành công");
+            return new ApiErrorResult<bool>(result.Errors.Select(e => e.Description).First());
+        }
+
+        private async Task<bool> IsUserInRole(Guid userId,string roleName)
+        {
+            var users = await _userManager.GetUsersInRoleAsync(roleName);
+
+            foreach (var user in users)
+            {
+                if (user.Id == userId)
+                    return true;
+            }
+            return false;
         }
     }
 }
