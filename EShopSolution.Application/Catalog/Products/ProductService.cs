@@ -167,7 +167,7 @@ namespace EShopSolution.Application.Catalog.Products
             if (!string.IsNullOrEmpty(request.KeyWord))
                 query = query.Where(x => x.pt.Name.ToLower().Contains(request.KeyWord.ToLower()));
 
-            if (request.CategoryIds.Count > 0)
+            if (request.CategoryIds!=null&& request.CategoryIds.Count > 0)
                 query = query.Where(x => request.CategoryIds.Contains(x.pic.CategoryId));
 
             //3. paging

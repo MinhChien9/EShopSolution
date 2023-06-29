@@ -34,7 +34,13 @@ namespace BackendApi.Controllers
 
             return Ok(products);
         }
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging( [FromQuery] GetManageProductPagingRequest request)
+        {
+            var products = await _productService.GetAllPaging( request);
 
+            return Ok(products);
+        }
         [HttpGet("{productId}/{languageId}")]
         public async Task<IActionResult> GetById(int productId, string languageId)
         {
@@ -47,6 +53,7 @@ namespace BackendApi.Controllers
         }
 
         [HttpPost()]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
